@@ -1,0 +1,1967 @@
+<html lang="pt-BR">
+
+	<head>
+		
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+		<title>Memórias em Peças</title>
+
+
+		<style>
+
+			/* =====================================================
+			CONFIGURAÇÕES GERAIS
+			===================================================== */
+
+			#PARABENS{
+				display: none;
+                text-align: center;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+
+			body {
+
+				margin: 0;
+
+                width: 100vw;
+                height: 100vh;
+
+				font-family: Arial, Helvetica, sans-serif;
+
+				background-color: #f4f6f8;
+
+				background-image: url('https://uploads.onecompiler.io/44zhg54te/454wycsq2/Novo%20Projeto.png');
+				background-position: center center;
+				max-width: 100%;
+				height: auto;
+				display: block;
+                background-size: 100% 100%;
+                background-attachment: fixed;
+
+				cursor: url('https://uploads.onecompiler.io/44zhg54te/454wycsq2/sonic%20transp%20svg.svg'), auto; 
+				color: #333;
+
+			}
+
+
+			/* =====================================================
+			CABEÇALHO
+			===================================================== */
+
+			header {
+
+				background-color:;
+
+				text-align: center;
+
+				padding: 25px 20px;
+
+				border-bottom: 0px solid #ddd;
+
+			}
+
+
+			header h1 {
+
+				margin: 0;
+
+				font-size: 34px;
+
+			}
+
+
+			header p {
+
+				margin-top: 10px;
+
+				font-size: 18px;
+
+			}
+
+
+			/* =====================================================
+			CONTEÚDO
+			===================================================== */
+
+			main {
+
+				max-width: 950px;
+
+				margin: auto;
+
+				padding: 30px 20px;
+
+			}
+
+
+			.painel {
+
+				background-color: rgb(5,100,200, 0.5);
+
+				padding: 25px;
+
+				margin-bottom: 25px;
+
+				border-radius: 16px;
+
+				box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+
+			}
+
+
+			.painel h2 {
+
+				margin-top: 0;
+
+			}
+
+
+			/* =====================================================
+			CONTROLES
+			===================================================== */
+
+			.controles {
+
+				display: flex;
+
+				flex-wrap: wrap;
+
+				gap: 20px;
+
+				align-items: end;
+
+			}
+
+
+			.campo {
+
+				display: flex;
+
+				flex-direction: column;
+
+				gap: 8px;
+
+				flex: 1;
+
+				min-width: 220px;
+
+			}
+
+
+			label {
+
+				font-size: 17px;
+
+				font-weight: bold;
+
+			}
+
+
+			input,
+			select {
+
+				padding: 13px;
+
+				font-size: 17px;
+
+				border: 1px solid #bbb;
+
+				border-radius: 9px;
+
+				background-color: white;
+
+			}
+
+
+			/* =====================================================
+			BOTÕES
+			===================================================== */
+
+			button {
+
+				padding: 14px 22px;
+
+				font-size: 17px;
+
+				border: none;
+
+				border-radius: 10px;
+
+				cursor: pointer;
+
+				background-color: #1565c0;
+
+				color: white;
+
+				transition: 0.2s;
+
+			}
+
+
+			button:hover {
+
+				background-color: #0d47a1;
+
+			}
+
+
+			button:disabled {
+
+				background-color: #aaa;
+
+				cursor: not-allowed;
+
+			}
+
+
+			/* =====================================================
+			ÁREA DO JOGO
+			===================================================== */
+
+			#areaJogo {
+
+				display: none;
+
+			}
+
+
+			.instrucao {
+
+				text-align: center;
+
+				font-size: 19px;
+
+				line-height: 1.5;
+
+			}
+
+
+			#mensagem {
+
+				text-align: center;
+
+				min-height: 40px;
+
+				margin: 20px 0;
+
+				font-size: 22px;
+
+				font-weight: bold;
+
+			}
+
+
+			.sucesso {
+
+				color: #1b5e20;
+
+				font-size: 28px !important;
+
+			}
+
+
+			/* =====================================================
+			QUEBRA-CABEÇA
+			===================================================== */
+
+			#quebraCabeca {
+
+				display: grid;
+
+				width: min(720px, 95vw);
+
+				margin: 25px auto;
+
+				border: 5px solid #333;
+
+				border-radius: 12px;
+
+				overflow: hidden;
+
+				background-color: #eee;
+
+			}
+
+
+			.peca {
+
+				width: 100%;
+
+				height: 100%;
+
+				padding: 0;
+
+				border: 2px solid white;
+
+				border-radius: 0;
+
+				background-repeat: no-repeat;
+
+				cursor: pointer;
+
+			}
+
+
+			.peca:hover {
+
+				opacity: 0.9;
+
+			}
+
+
+			/*
+				Peça selecionada pelo participante
+			*/
+
+			.peca.selecionada {
+
+				outline: 7px solid #ff9800;
+
+				outline-offset: -7px;
+
+				z-index: 2;
+
+			}
+
+
+			/* =====================================================
+			BOTÕES ABAIXO DO JOGO
+			===================================================== */
+
+			.acoes {
+
+				display: flex;
+
+				flex-wrap: wrap;
+
+				justify-content: center;
+
+				gap: 12px;
+
+				margin-top: 25px;
+
+			}
+
+
+			/* =====================================================
+			FOTOGRAFIA ORIGINAL
+			===================================================== */
+
+			#fotoOriginalContainer {
+
+				display: none;
+
+				margin-top: 35px;
+
+				text-align: center;
+
+			}
+
+
+			#fotoOriginal {
+
+				max-width: 100%;
+
+				max-height: 650px;
+
+				border-radius: 12px;
+
+				border: 6px solid white;
+
+				box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+
+			}
+
+
+			/* =====================================================
+			RESPONSIVIDADE
+			===================================================== */
+
+			@media (max-width: 650px) {
+
+				header h1 {
+
+					font-size: 27px;
+
+				}
+
+
+				.controles {
+
+					flex-direction: column;
+
+					align-items: stretch;
+
+				}
+
+
+				.campo {
+
+					width: 100%;
+
+				}
+
+
+				button {
+
+					width: 100%;
+
+				}
+
+			}
+
+		</style>
+
+	</head>
+
+
+
+	<body>
+		
+
+	<!--CABEÇALHO-->
+
+	<header>
+
+		<h1>🧩 Memórias em Peças</h1>
+
+		<p>
+			Transformando uma fotografia especial
+			em um quebra-cabeça.
+		</p>
+
+	</header>
+
+
+
+	<main>
+
+		<!-- =====================================================
+			PREPARAR ATIVIDADE
+		====================================================== -->
+
+    <section class="painel">
+
+        <h2>Preparar atividade</h2>
+
+
+        <div class="controles">
+
+
+            <!-- ESCOLHER FOTO -->
+
+            <div class="campo">
+
+                <label for="arquivoFoto">
+                    Escolha uma fotografia:
+                </label>
+
+
+                <input type="file" id="arquivoFoto" accept="image/*">
+
+            </div>
+
+
+
+            <!-- ESCOLHER NÍVEL -->
+
+            <div class="campo">
+
+                <label for="dificuldade">
+                    Escolha o nível:
+                </label>
+
+
+                <select id="dificuldade">
+
+                    <option value="4">
+                        Nível 1 — 4 peças
+                    </option>
+
+                    <option value="6">
+                        Nível 2 — 6 peças
+                    </option>
+
+                    <option value="9">
+                        Nível 3 — 9 peças
+                    </option>
+
+                    <option value="12">
+                        Nível 4 — 12 peças
+                    </option>
+
+                    <option value="16">
+                        Nível 5 — 16 peças
+                    </option>
+
+                    <option value="18">
+                        Nível 6 — 18 peças
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- COMEÇAR -->
+
+            <button id="btnComecar">
+
+                ▶ Começar
+
+            </button>
+
+
+        </div>
+
+		
+
+    </section>
+
+		
+
+    <!-- =====================================================
+         ÁREA DO JOGO
+    ====================================================== -->
+
+
+    <section class="painel" id="areaJogo">
+
+
+        <h2 style="text-align: center;">
+
+            Monte a fotografia
+
+        </h2>
+
+
+        <p class="instrucao">
+
+            Escolha uma peça.<br>
+
+            Depois escolha outra peça para trocar
+            as duas de lugar.
+
+        </p>
+
+
+
+        <!-- MENSAGENS -->
+
+        <div id="mensagem"></div>
+
+
+
+        <!-- QUEBRA-CABEÇA -->
+		
+        <div id="quebraCabeca"></div>
+
+
+
+        <!-- AÇÕES -->
+
+        <div class="acoes">
+
+
+            <button id="btnMisturar">
+
+                🔀 Misturar novamente
+
+            </button>
+
+
+            <button id="btnVerFoto">
+
+                🖼️ Ver fotografia
+
+            </button>
+
+
+            <button id="btnImprimir" disabled="">
+
+                🖨️ Imprimir fotografia
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- FOTO ORIGINAL -->
+
+        <div id="fotoOriginalContainer">
+
+
+            <h2>
+                ❤️ Sua memória especial
+            </h2>
+
+
+            <img id="fotoOriginal" alt="Fotografia escolhida para o quebra-cabeça">
+
+
+        </div>
+
+
+    </section>
+
+		<div id="PARABENS">
+			<h1>VOCE CONSEGUIU!!!</h1>
+			<img src=https://uploads.onecompiler.io/44zhg54te/454wycsq2/f497d55088aba26d78c26958a636b97a.gif>
+		</div>
+
+	</main>
+
+	
+
+<script>
+
+
+    // =========================================================
+    // ELEMENTOS DO HTML
+    // =========================================================
+
+    const arquivoFoto =
+        document.getElementById("arquivoFoto");
+
+
+    const dificuldade =
+        document.getElementById("dificuldade");
+
+
+    const btnComecar =
+        document.getElementById("btnComecar");
+
+
+    const btnMisturar =
+        document.getElementById("btnMisturar");
+
+
+    const btnVerFoto =
+        document.getElementById("btnVerFoto");
+
+
+    const btnImprimir =
+        document.getElementById("btnImprimir");
+
+
+    const areaJogo =
+        document.getElementById("areaJogo");
+
+
+    const quebraCabeca =
+        document.getElementById("quebraCabeca");
+
+
+    const mensagem =
+        document.getElementById("mensagem");
+
+
+    const fotoOriginalContainer =
+        document.getElementById("fotoOriginalContainer");
+
+
+    const fotoOriginal =
+        document.getElementById("fotoOriginal");
+
+
+
+    // =========================================================
+    // VARIÁVEIS DO JOGO
+    // =========================================================
+
+
+    /*
+        Guarda a fotografia escolhida.
+    */
+
+    let imagemURL = null;
+
+
+
+    /*
+        Guarda a posição das peças.
+
+        Exemplo correto:
+
+        [0, 1, 2, 3]
+
+        Exemplo embaralhado:
+
+        [2, 0, 3, 1]
+    */
+
+    let pecas = [];
+
+
+
+    /*
+        Guarda a primeira peça
+        selecionada pelo participante.
+    */
+
+    let primeiraPecaSelecionada = null;
+
+
+
+    /*
+        Quantidade de linhas e colunas.
+    */
+
+    let linhas = 2;
+
+    let colunas = 2;
+
+
+
+    /*
+        Proporção original da fotografia.
+    */
+
+    let proporcaoImagem = 1;
+
+
+
+    // =========================================================
+    // BOTÃO COMEÇAR
+    // =========================================================
+
+    btnComecar.addEventListener(
+        "click",
+        function () {
+
+
+            /*
+                Pega o arquivo escolhido.
+            */
+
+            const arquivo =
+                arquivoFoto.files[0];
+
+
+
+            /*
+                Se não escolheu fotografia.
+            */
+
+            if (!arquivo) {
+
+                alert(
+                    "Escolha uma fotografia primeiro."
+                );
+
+                return;
+
+            }
+
+
+
+            /*
+                FileReader lê a fotografia
+                diretamente no navegador.
+
+                A imagem não é enviada
+                para nenhum servidor.
+            */
+
+            const leitor =
+                new FileReader();
+
+
+
+            leitor.onload =
+                function (evento) {
+
+
+                    /*
+                        Guarda a fotografia
+                        em memória.
+                    */
+
+                    imagemURL =
+                        evento.target.result;
+
+
+
+                    /*
+                        Mostra a mesma fotografia
+                        na área de foto original.
+                    */
+
+                    fotoOriginal.src =
+                        imagemURL;
+
+
+
+                    /*
+                        Criamos temporariamente
+                        uma imagem para descobrir
+                        largura e altura.
+                    */
+
+                    const img =
+                        new Image();
+
+
+
+                    img.onload =
+                        function () {
+
+
+                            /*
+                                Calcula a proporção:
+
+                                largura / altura
+                            */
+
+                            proporcaoImagem =
+
+                                img.naturalWidth /
+                                img.naturalHeight;
+
+
+
+                            /*
+                                Define linhas e colunas
+                                conforme o nível.
+                            */
+
+                            configurarDificuldade();
+
+
+
+                            /*
+                                Inicia o jogo.
+                            */
+
+                            iniciarJogo();
+
+                        };
+
+
+
+                    img.src =
+                        imagemURL;
+
+                };
+
+
+
+            /*
+                Faz a leitura do arquivo.
+            */
+
+            leitor.readAsDataURL(
+                arquivo
+            );
+
+        }
+    );
+
+
+
+    // =========================================================
+    // CONFIGURAR DIFICULDADE
+    // =========================================================
+
+    function configurarDificuldade() {
+
+
+        const quantidade =
+            Number(dificuldade.value);
+
+
+
+        /*
+            Descobre se a fotografia
+            é horizontal ou vertical.
+        */
+
+        const fotoHorizontal =
+            proporcaoImagem >= 1;
+
+
+
+        // -----------------------------------------------------
+        // 4 PEÇAS
+        // -----------------------------------------------------
+
+        if (quantidade === 4) {
+
+            linhas = 2;
+
+            colunas = 2;
+
+        }
+
+
+
+        // -----------------------------------------------------
+        // 6 PEÇAS
+        // -----------------------------------------------------
+
+        else if (quantidade === 6) {
+
+
+            if (fotoHorizontal) {
+
+                linhas = 2;
+
+                colunas = 3;
+
+            }
+
+            else {
+
+                linhas = 3;
+
+                colunas = 2;
+
+            }
+
+        }
+
+
+
+        // -----------------------------------------------------
+        // 9 PEÇAS
+        // -----------------------------------------------------
+
+        else if (quantidade === 9) {
+
+            linhas = 3;
+
+            colunas = 3;
+
+        }
+
+
+
+        // -----------------------------------------------------
+        // 12 PEÇAS
+        // -----------------------------------------------------
+
+        else if (quantidade === 12) {
+
+
+            if (fotoHorizontal) {
+
+                linhas = 3;
+
+                colunas = 4;
+
+            }
+
+            else {
+
+                linhas = 4;
+
+                colunas = 3;
+
+            }
+
+        }
+
+
+
+        // -----------------------------------------------------
+        // 16 PEÇAS
+        // -----------------------------------------------------
+
+        else if (quantidade === 16) {
+
+            linhas = 4;
+
+            colunas = 4;
+
+        }
+
+
+
+        // -----------------------------------------------------
+        // 18 PEÇAS
+        // -----------------------------------------------------
+
+        else if (quantidade === 18) {
+
+
+            if (fotoHorizontal) {
+
+                linhas = 3;
+
+                colunas = 6;
+
+            }
+
+            else {
+
+                linhas = 6;
+
+                colunas = 3;
+
+            }
+
+        }
+
+    }
+
+
+
+    // =========================================================
+    // INICIAR JOGO
+    // =========================================================
+
+    function iniciarJogo() {
+
+
+        /*
+            Nenhuma peça começa selecionada.
+        */
+
+        primeiraPecaSelecionada =
+            null;
+
+
+
+        /*
+            Mensagem inicial.
+        */
+
+        mensagem.textContent =
+
+            "Escolha duas peças para trocar de lugar.";
+
+
+
+        mensagem.classList.remove(
+            "sucesso"
+        );
+
+
+
+        /*
+            Impressão só ficará disponível
+            quando o jogo for concluído.
+        */
+
+        btnImprimir.disabled =
+            true;
+
+
+
+        /*
+            Esconde fotografia original.
+        */
+
+        fotoOriginalContainer.style.display =
+            "none";
+
+
+
+        btnVerFoto.textContent =
+            "🖼️ Ver fotografia";
+
+
+
+        /*
+            Mostra a área do jogo.
+        */
+
+        areaJogo.style.display =
+            "block";
+
+
+
+        /*
+            Quantidade total de peças.
+        */
+
+        const quantidade =
+            linhas * colunas;
+
+
+
+        /*
+            Cria a sequência correta.
+
+            Exemplo:
+
+            0
+            1
+            2
+            3
+        */
+
+        pecas = [];
+
+
+        for (
+            let i = 0;
+            i < quantidade;
+            i++
+        ) {
+
+            pecas.push(i);
+
+        }
+
+
+
+        /*
+            Mistura as peças.
+        */
+
+        embaralhar();
+
+
+
+        /*
+            Monta o quebra-cabeça
+            na tela.
+        */
+
+        desenharQuebraCabeca();
+
+
+
+        /*
+            Leva a tela até o jogo.
+        */
+
+        areaJogo.scrollIntoView({
+
+            behavior: "smooth"
+
+        });
+
+    }
+
+
+
+    // =========================================================
+    // EMBARALHAR
+    // =========================================================
+
+    function embaralhar() {
+
+
+        /*
+            O DO / WHILE garante que
+            o jogo nunca comece já montado.
+        */
+
+        do {
+
+
+            /*
+                Algoritmo Fisher-Yates
+                para embaralhamento.
+            */
+
+            for (
+                let i = pecas.length - 1;
+                i > 0;
+                i--
+            ) {
+
+
+                const j =
+                    Math.floor(
+                        Math.random() *
+                        (i + 1)
+                    );
+
+
+
+                /*
+                    Troca duas posições.
+                */
+
+                [
+                    pecas[i],
+                    pecas[j]
+                ]
+                =
+                [
+                    pecas[j],
+                    pecas[i]
+                ];
+
+            }
+
+
+        }
+        while (estaCompleto());
+
+    }
+
+
+
+    // =========================================================
+    // DESENHAR QUEBRA-CABEÇA
+    // =========================================================
+
+    function desenharQuebraCabeca() {
+
+
+        /*
+            Limpa o quebra-cabeça anterior.
+        */
+
+        quebraCabeca.innerHTML =
+            "";
+
+
+
+        /*
+            Define a quantidade
+            de colunas do Grid.
+        */
+
+        quebraCabeca.style.gridTemplateColumns =
+
+            `repeat(${colunas}, 1fr)`;
+
+
+
+        /*
+            Define a quantidade
+            de linhas do Grid.
+        */
+
+        quebraCabeca.style.gridTemplateRows =
+
+            `repeat(${linhas}, 1fr)`;
+
+
+
+        /*
+            Mantém a mesma proporção
+            da fotografia original.
+        */
+
+        quebraCabeca.style.aspectRatio =
+
+            proporcaoImagem;
+
+
+
+        /*
+            Percorre todas as peças.
+        */
+
+        pecas.forEach(
+
+            function (
+                numeroPeca,
+                posicaoAtual
+            ) {
+
+
+                /*
+                    Cria um botão que
+                    representará uma peça.
+                */
+
+                const peca =
+
+                    document.createElement(
+                        "button"
+                    );
+
+
+
+                peca.classList.add(
+                    "peca"
+                );
+
+
+
+                /*
+                    Descobre onde aquela
+                    parte da foto deveria estar.
+                */
+
+                const linhaOriginal =
+
+                    Math.floor(
+                        numeroPeca /
+                        colunas
+                    );
+
+
+
+                const colunaOriginal =
+
+                    numeroPeca %
+                    colunas;
+
+
+
+                /*
+                    Todas as peças usam
+                    a mesma fotografia.
+                */
+
+                peca.style.backgroundImage =
+
+                    `url("${imagemURL}")`;
+
+
+
+                /*
+                    Aumenta a fotografia
+                    para ocupar todo o Grid.
+                */
+
+                peca.style.backgroundSize =
+
+                    `${colunas * 100}%
+                     ${linhas * 100}%`;
+
+
+
+                /*
+                    Calcula a posição horizontal
+                    da parte da fotografia.
+                */
+
+                let posicaoX = 0;
+
+
+                if (colunas > 1) {
+
+                    posicaoX =
+
+                        (
+                            colunaOriginal /
+                            (colunas - 1)
+                        )
+                        * 100;
+
+                }
+
+
+
+                /*
+                    Calcula a posição vertical.
+                */
+
+                let posicaoY = 0;
+
+
+                if (linhas > 1) {
+
+                    posicaoY =
+
+                        (
+                            linhaOriginal /
+                            (linhas - 1)
+                        )
+                        * 100;
+
+                }
+
+
+
+                /*
+                    Mostra somente a parte
+                    correta da imagem.
+                */
+
+                peca.style.backgroundPosition =
+
+                    `${posicaoX}%
+                     ${posicaoY}%`;
+
+
+
+                /*
+                    Acessibilidade.
+                */
+
+                peca.setAttribute(
+
+                    "aria-label",
+
+                    `Peça ${posicaoAtual + 1}`
+
+                );
+
+
+
+                /*
+                    Evento de clique.
+                */
+
+                peca.addEventListener(
+
+                    "click",
+
+                    function () {
+
+
+                        selecionarPeca(
+                            posicaoAtual
+                        );
+
+                    }
+
+                );
+
+
+
+                /*
+                    Adiciona a peça
+                    ao quebra-cabeça.
+                */
+
+                quebraCabeca.appendChild(
+                    peca
+                );
+
+            }
+
+        );
+
+    }
+
+
+
+    // =========================================================
+    // SELECIONAR PEÇA
+    // =========================================================
+
+    function selecionarPeca(
+        posicao
+    ) {
+
+
+        /*
+            PRIMEIRO CLIQUE
+        */
+
+        if (
+            primeiraPecaSelecionada === null
+        ) {
+
+
+            primeiraPecaSelecionada =
+                posicao;
+
+
+
+            mensagem.textContent =
+
+                "Agora escolha outra peça.";
+
+
+
+            destacarSelecionada();
+
+
+            return;
+
+        }
+
+
+
+        /*
+            SE CLICAR NOVAMENTE
+            NA MESMA PEÇA
+        */
+
+        if (
+            primeiraPecaSelecionada ===
+            posicao
+        ) {
+
+
+            primeiraPecaSelecionada =
+                null;
+
+
+
+            mensagem.textContent =
+
+                "Escolha duas peças para trocar de lugar.";
+
+
+
+            desenharQuebraCabeca();
+
+
+            return;
+
+        }
+
+
+
+        /*
+            TROCA AS DUAS PEÇAS
+        */
+
+        const temporaria =
+
+            pecas[
+                primeiraPecaSelecionada
+            ];
+
+
+
+        pecas[
+            primeiraPecaSelecionada
+        ]
+        =
+        pecas[
+            posicao
+        ];
+
+
+
+        pecas[
+            posicao
+        ]
+        =
+        temporaria;
+
+
+
+        /*
+            Limpa a seleção.
+        */
+
+        primeiraPecaSelecionada =
+            null;
+
+
+
+        /*
+            Redesenha o jogo.
+        */
+
+        desenharQuebraCabeca();
+
+
+
+        /*
+            Verifica se terminou.
+        */
+
+        if (estaCompleto()) {
+
+            jogoConcluido();
+
+        }
+
+        else {
+
+            mensagem.textContent =
+
+                "Muito bem! Continue montando.";
+
+        }
+
+    }
+
+
+
+    // =========================================================
+    // DESTACAR PEÇA SELECIONADA
+    // =========================================================
+
+    function destacarSelecionada() {
+
+
+        const elementos =
+
+            quebraCabeca.querySelectorAll(
+                ".peca"
+            );
+
+
+
+        elementos.forEach(
+
+            function (
+                elemento,
+                indice
+            ) {
+
+
+                if (
+                    indice ===
+                    primeiraPecaSelecionada
+                ) {
+
+
+                    elemento.classList.add(
+                        "selecionada"
+                    );
+
+                }
+
+            }
+
+        );
+
+    }
+
+
+
+    // =========================================================
+    // VERIFICAR SE ESTÁ COMPLETO
+    // =========================================================
+
+    function estaCompleto() {
+
+
+        /*
+            Cada posição precisa
+            possuir o mesmo número.
+
+            Exemplo:
+
+            posição 0 = peça 0
+            posição 1 = peça 1
+            posição 2 = peça 2
+        */
+
+        for (
+            let i = 0;
+            i < pecas.length;
+            i++
+        ) {
+
+
+            if (
+                pecas[i] !== i
+            ) {
+
+                return false;
+
+            }
+
+        }
+
+
+
+        return true;
+
+    }
+
+
+
+    // =========================================================
+    // JOGO CONCLUÍDO
+    // =========================================================
+
+    function jogoConcluido() {
+
+
+        const div = document.getElementById("PARABENS");
+        
+        // Verifica se já está visível
+        if (div.style.display === "none" || div.style.display === "") {
+            div.style.display = "block"; // Torna visível
+		}
+
+        mensagem.textContent =
+
+            "🎉 Parabéns! Você completou uma memória especial!";
+
+
+
+        mensagem.classList.add(
+            "sucesso"
+        );
+
+
+
+        /*
+            Libera impressão.
+        */
+
+        btnImprimir.disabled =
+            false;
+
+
+
+        /*
+            Mostra a fotografia inteira.
+        */
+
+        fotoOriginalContainer.style.display =
+            "block";
+
+
+
+        btnVerFoto.textContent =
+            "🙈 Esconder fotografia";
+
+
+
+        /*
+            Depois de meio segundo,
+            leva a tela até a fotografia.
+        */
+
+        setTimeout(
+
+            function () {
+
+
+                fotoOriginalContainer.scrollIntoView({
+
+                    behavior: "smooth"
+
+                });
+
+            },
+
+            500
+
+        );
+
+    }
+
+
+
+    // =========================================================
+    // MISTURAR NOVAMENTE
+    // =========================================================
+
+    btnMisturar.addEventListener(
+
+        "click",
+
+        function () {
+
+
+            primeiraPecaSelecionada =
+                null;
+
+
+
+            /*
+                Embaralha.
+            */
+
+            embaralhar();
+
+
+
+            /*
+                Redesenha.
+            */
+
+            desenharQuebraCabeca();
+
+
+
+            mensagem.textContent =
+
+                "Vamos montar novamente!";
+
+
+
+            mensagem.classList.remove(
+                "sucesso"
+            );
+
+
+
+            /*
+                Desabilita impressão novamente.
+            */
+
+            btnImprimir.disabled =
+                true;
+
+
+
+            /*
+                Esconde foto.
+            */
+
+            fotoOriginalContainer.style.display =
+                "none";
+
+
+
+            btnVerFoto.textContent =
+                "🖼️ Ver fotografia";
+
+        }
+
+    );
+
+
+
+    // =========================================================
+    // MOSTRAR OU ESCONDER FOTOGRAFIA
+    // =========================================================
+
+    btnVerFoto.addEventListener(
+
+        "click",
+
+        function () {
+
+
+            if (
+                fotoOriginalContainer.style.display ===
+                "block"
+            ) {
+
+
+                fotoOriginalContainer.style.display =
+                    "none";
+
+
+                btnVerFoto.textContent =
+                    "🖼️ Ver fotografia";
+
+            }
+
+            else {
+
+
+                fotoOriginalContainer.style.display =
+                    "block";
+
+
+                btnVerFoto.textContent =
+                    "🙈 Esconder fotografia";
+
+            }
+
+        }
+
+    );
+
+
+
+    // =========================================================
+    // IMPRIMIR FOTOGRAFIA
+    // =========================================================
+
+    btnImprimir.addEventListener(
+
+        "click",
+
+        function () {
+
+
+            /*
+                Abre uma nova janela
+                somente com a fotografia.
+            */
+
+            const janela =
+
+                window.open(
+                    "",
+                    "_blank"
+                );
+
+
+
+            janela.document.write(`
+
+                <!DOCTYPE html>
+
+                <html lang="pt-BR">
+
+                <head>
+
+                    <meta charset="UTF-8">
+
+                    <title>
+                        Memórias em Peças
+                    </title>
+
+
+                    <style>
+
+                        body {
+
+                            margin: 0;
+
+                            display: flex;
+
+                            justify-content: center;
+
+                            align-items: center;
+
+                            min-height: 100vh;
+
+                            background-color: white;
+
+                        }
+
+
+                        img {
+
+                            max-width: 95%;
+
+                            max-height: 95vh;
+
+                            object-fit: contain;
+
+                        }
+
+                    </style>
+
+                </head>
+
+
+                <body>
+
+
+                    <img
+                        src="${imagemURL}"
+                        alt="Memória especial"
+                    >
+
+
+                    <script>
+
+                        window.onload =
+                            function () {
+
+                                window.print();
+
+                            };
+
+                    <\/script>
+
+
+                </body>
+
+                </html>
+
+            `);
+
+
+
+            janela.document.close();
+
+        }
+
+    );
+
+
+</script>
+
+
+
+
+</body></html>
